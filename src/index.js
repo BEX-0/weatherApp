@@ -1,4 +1,3 @@
-import "./styles.css";
 function formateDate() {
   let now = new Date();
   let days = [
