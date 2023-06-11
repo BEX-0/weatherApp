@@ -20,6 +20,11 @@ input {
   top: 5px;
 }
 
+.fiveDayEmoji {
+  font-size: 40px;
+  padding: 0px 5px;
+}
+
 .main-body {
   border: 3px solid #141010;
   max-width: 900px;
