@@ -36,6 +36,7 @@ function changeCity(event) {
   let cityName = document.querySelector("#cityInput").value;
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(url).then(changeCurrentTemp);
+  axios.get(url).then(changeCondition);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
@@ -44,4 +45,9 @@ function changeCurrentTemp(response) {
   let currentTemp = Math.round(response.data.main.temp);
   let currentTemperature = document.querySelector(".currentTemperature");
   currentTemperature.innerHTML = `${currentTemp}°C`;
+}
+
+function changeCondition(response) {
+  let condition = document.querySelector(".currentCondition");
+  condition.innerHTML = response.data.weather[0].description;
 }
