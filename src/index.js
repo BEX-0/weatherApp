@@ -38,6 +38,7 @@ function changeCity(event) {
   axios.get(url).then(changeCurrentTemp);
   axios.get(url).then(changeCondition);
   axios.get(url).then(changeHumidity);
+  axios.get(url).then(changeWind);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
@@ -58,4 +59,10 @@ function changeHumidity(response) {
   let humidity = document.querySelector(".humidity");
   let currentHumidity = response.data.main.humidity;
   humidity.innerHTML = `${currentHumidity}%`;
+}
+
+function changeWind(response) {
+  let wind = document.querySelector(".wind");
+  let currentWind = response.data.wind.speed;
+  wind.innerHTML = `${currentWind}km/h`;
 }
