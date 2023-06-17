@@ -21,7 +21,6 @@ input {
 }
 
 .fiveDayEmoji {
-  font-size: 40px;
   padding: 0px 5px;
 }
 
@@ -58,9 +57,15 @@ p {
   font-size: 75px;
 }
 
+li:first-letter {
+  text-transform: capitalize;
+}
+
 .card {
   border: 0.5px solid transparent;
   background: transparent;
+  max-width: fit-content;
+  margin: 0px;
 }
 
 .card-body {

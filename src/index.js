@@ -39,6 +39,7 @@ function changeCity(event) {
   axios.get(url).then(changeCondition);
   axios.get(url).then(changeHumidity);
   axios.get(url).then(changeWind);
+  axios.get(url).then(changeEmoji);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
@@ -65,4 +66,9 @@ function changeWind(response) {
   let wind = document.querySelector(".wind");
   let currentWind = response.data.wind.speed;
   wind.innerHTML = `${currentWind}km/h`;
+}
+
+function changeEmoji(response) {
+  let currentEmoji = document.querySelector("#currentEmoji");
+  currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 }
