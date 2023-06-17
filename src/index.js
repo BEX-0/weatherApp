@@ -32,9 +32,9 @@ function changeCity(event) {
   let city = document.querySelector(".city");
   city.innerHTML = `${input.value}`;
 
-  let apiKey = "1fd8093fa5ff12d796d7de756cc9d6b9";
+  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
   let cityName = document.querySelector("#cityInput").value;
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
   axios.get(url).then(changeCurrentTemp);
   axios.get(url).then(changeCondition);
   axios.get(url).then(changeHumidity);
@@ -44,7 +44,7 @@ let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
 
 function changeCurrentTemp(response) {
-  let currentTemp = Math.round(response.data.main.temp);
+  let currentTemp = Math.round(response.data.temperature.current);
   let currentTemperature = document.querySelector(".currentTemperature");
   currentTemperature.innerHTML = `${currentTemp}°C`;
 }
@@ -52,12 +52,12 @@ function changeCurrentTemp(response) {
 function changeCondition(response) {
   console.log(response.data)
   let condition = document.querySelector(".currentCondition");
-  condition.innerHTML = response.data.weather[0].main;
+  condition.innerHTML = response.data.condition.description;
 }
 
 function changeHumidity(response) {
   let humidity = document.querySelector(".humidity");
-  let currentHumidity = response.data.main.humidity;
+  let currentHumidity = response.data.temperature.humidity;
   humidity.innerHTML = `${currentHumidity}%`;
 }
 
