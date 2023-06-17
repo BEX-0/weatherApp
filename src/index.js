@@ -37,6 +37,7 @@ function changeCity(event) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(url).then(changeCurrentTemp);
   axios.get(url).then(changeCondition);
+  axios.get(url).then(changeHumidity);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
@@ -48,6 +49,13 @@ function changeCurrentTemp(response) {
 }
 
 function changeCondition(response) {
+  console.log(response.data)
   let condition = document.querySelector(".currentCondition");
-  condition.innerHTML = response.data.weather[0].description;
+  condition.innerHTML = response.data.weather[0].main;
+}
+
+function changeHumidity(response) {
+  let humidity = document.querySelector(".humidity");
+  let currentHumidity = response.data.main.humidity;
+  humidity.innerHTML = `${currentHumidity}%`;
 }
