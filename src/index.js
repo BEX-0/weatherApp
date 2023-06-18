@@ -44,9 +44,10 @@ function changeCity(event) {
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
 
+let currentTemperature = document.querySelector(".currentTemperature");
+
 function changeCurrentTemp(response) {
   let currentTemp = Math.round(response.data.temperature.current);
-  let currentTemperature = document.querySelector(".currentTemperature");
   currentTemperature.innerHTML = `${currentTemp}`;
 
   celsiusTemp = response.data.temperature.current;
@@ -77,7 +78,6 @@ function changeEmoji(response) {
 
 function convertToFahrenheit(event) {
   event.preventDefault();
-  let currentTemperature = document.querySelector(".currentTemperature");
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   currentTemperature.innerHTML = Math.round(fahrenheitTemp);
 
@@ -90,7 +90,6 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 function convertToCelsius(event) {
   event.preventDefault();
-  let currentTemperature = document.querySelector(".currentTemperature");
   currentTemperature.innerHTML = Math.round(celsiusTemp);
 }
 
