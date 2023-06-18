@@ -32,6 +32,9 @@ function changeCity(event) {
   let city = document.querySelector(".city");
   city.innerHTML = `${input.value}`;
 
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+
   let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
   let cityName = document.querySelector("#cityInput").value;
   let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
@@ -78,6 +81,8 @@ function changeEmoji(response) {
 
 function convertToFahrenheit(event) {
   event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   currentTemperature.innerHTML = Math.round(fahrenheitTemp);
 
@@ -90,6 +95,8 @@ fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 function convertToCelsius(event) {
   event.preventDefault();
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
   currentTemperature.innerHTML = Math.round(celsiusTemp);
 }
 
