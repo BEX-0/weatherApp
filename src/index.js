@@ -47,7 +47,9 @@ form.addEventListener("submit", changeCity);
 function changeCurrentTemp(response) {
   let currentTemp = Math.round(response.data.temperature.current);
   let currentTemperature = document.querySelector(".currentTemperature");
-  currentTemperature.innerHTML = `${currentTemp}°C`;
+  currentTemperature.innerHTML = `${currentTemp}`;
+
+  celsiusTemp = response.data.temperature.current;
 }
 
 function changeCondition(response) {
@@ -72,3 +74,15 @@ function changeEmoji(response) {
   let currentEmoji = document.querySelector("#currentEmoji");
   currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 }
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let currentTemperature = document.querySelector(".currentTemperature");
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  currentTemperature.innerHTML = Math.round(fahrenheitTemp);
+}
+
+let celsiusTemp = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheitLink");
+fahrenheitLink.addEventListener("click", convertToFahrenheit);
