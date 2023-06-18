@@ -80,9 +80,20 @@ function convertToFahrenheit(event) {
   let currentTemperature = document.querySelector(".currentTemperature");
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   currentTemperature.innerHTML = Math.round(fahrenheitTemp);
+
 }
 
 let celsiusTemp = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheitLink");
 fahrenheitLink.addEventListener("click", convertToFahrenheit);
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  let currentTemperature = document.querySelector(".currentTemperature");
+  currentTemperature.innerHTML = Math.round(celsiusTemp);
+}
+
+
+let celsiusLink = document.querySelector("#celsiusLink");
+celsiusLink.addEventListener("click", convertToCelsius);
