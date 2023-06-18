@@ -1,6 +1,6 @@
 body {
-  background-image: url(images/redbluesky.jpg);
-  color: #141010;
+  background-color: #151515;
+  color: white;
   text-align: center;
   font-family: "Ubuntu", sans serif;
 }
@@ -12,11 +12,13 @@ h1 {
 
 .currentTemperature, .highLow, .weatherDetails {
   font-family: monospace;
+  color: #1f5192;
 }
 
 .currentTemperature, .city {
   font-size: 50px;
   font-weight: bold;
+  color: white;
 }
 
 .topUpperLeft {
@@ -36,32 +38,24 @@ input {
   top: 5px;
 }
 
-.fiveDayEmoji {
-  padding: 0px 5px;
-}
-
 .main-body {
-  border: 3px solid #141010;
+  border: 3px solid white;
   max-width: 900px;
-  background-color: rgba(245, 245, 245, 0.2);
+  background-color: #121212;
   display: block;
   margin: 0 auto;
-  margin-bottom: 90px;
+  padding-bottom: 50px;
+  margin-bottom: 75px;
   border-radius: 10px;
   position: relative;
   top: 40px;
-}
-
-p {
-  font-size: 30px;
-  padding-top: 50px;
-  text-align: center;
 }
 
 .five-day {
   border-radius: 10px;
   text-align: center;
   max-width: 850px;
+  padding-top: 50px;
   display: block;
   margin: 10px auto;
   font-size: 25px;
@@ -82,14 +76,23 @@ li:first-letter {
   padding: 5px 0px;
 }
 
+.card-body strong {
+  color: rgb(137, 137, 137);
+}
+
+.highLow strong, .weatherDetails, a {
+  color: #2C74B3
+}
+
 .dateTime {
   font-size: 25px;
   font-weight: 500px;
+  color: gray;
 }
 
 a {
   text-decoration: none;
-  color: darkviolet;
+  color: #1d5a9c;
   padding-bottom: 20px;
 }
 
@@ -106,5 +109,5 @@ ul {
 }
 
 .unitConvert .active {
-  color: #141010;
+  color: white;
 }
