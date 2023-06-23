@@ -25,6 +25,36 @@ function formateDate() {
 
 formateDate();
 
+function changeFiveDay() {
+  let fiveDay = document.querySelector(".five-day");
+  let fiveDayHTML =`<div class="row">`;
+
+  let days = ["Sun","Mon","Tues","Wed","Thu"]
+  days.forEach(function(day) {
+    fiveDayHTML = fiveDayHTML + `
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <strong>${day}</strong>
+          <br />
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="Cloudy" id="fiveDayEmoji">
+          <div class="highLow">
+          <strong>19°</strong>
+          <br />
+          10°
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+  })
+
+  fiveDayHTML = fiveDayHTML + `</div>`
+  fiveDay.innerHTML = fiveDayHTML;
+}
+
+changeFiveDay();
+
 function changeCity(event) {
   event.preventDefault();
   let input = document.querySelector("#cityInput");
