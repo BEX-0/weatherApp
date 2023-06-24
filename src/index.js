@@ -110,42 +110,38 @@ function formatDateForecast(timestamp) {
   return days[day];
 }
 
-function changeFiveDay(response, day) {
+function changeFiveDay(response) {
   console.log(response.data.daily);
     
   let fiveDayForecast = response.data.daily;
   let fiveDay = document.querySelector(".five-day");
   let fiveDayHTML =`<div class="row">`;
-  fiveDayForecast.forEach(forecastDay => {
-    let forecastHigh = Math.round(forecastDay.temperature.maximum);
-    let forecastLow = Math.round(forecastDay.temperature.minimum);
-    fiveDayHTML = fiveDayHTML + `
+fiveDayForecast.slice(0, 5).forEach(function(forecastDay) {
+    fiveDayHTML += `
     <div class="col">
       <div class="card">
         <div class="card-body">
           <div class="day">
-          <strong>${formatDateForecast(forecastDay.time)}</strong>
+            <strong>${formatDateForecast(forecastDay.time)}</strong>
           </div>
-          <img src="${forecastDay.condition.icon_url}" alt="weather-icon" id="five-day-emoji">
+          <img src="${forecastDay.condition.icon_url}" alt="weather-icon" id="five-day-emoji"></img>
           <div class="highLow">
             <div class="five-day-high">
               <strong>
-              ${forecastHigh}°
+              ${Math.round(forecastDay.temperature.maximum)}°
               </strong>
             </div>
             <div class="five-day-low">
-            ${forecastLow}°
-            </div
+            ${Math.round(forecastDay.temperature.minimum)}°
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    `;
-    fiveDayHTML = fiveDayHTML + `</div>`;
-    fiveDay.innerHTML = fiveDayHTML;
+    </div>`
+    ;
   });
-}  
-
+  fiveDay.innerHTML = fiveDayHTML;  
+}
 function getFiveDay(city) {
   let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
   let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
