@@ -99,9 +99,10 @@ function changeFiveDay(response) {
     
   let fiveDayForecast = response.data.daily;
   let fiveDay = document.querySelector(".five-day");
-
   let fiveDayHTML =`<div class="row">`;
   fiveDayForecast.forEach(forecastDay => {
+    let forecastHigh = Math.round(forecastDay.temperature.maximum);
+    let forecastLow = Math.round(forecastDay.temperature.minimum);
     fiveDayHTML = fiveDayHTML + `
     <div class="col">
       <div class="card">
@@ -113,11 +114,11 @@ function changeFiveDay(response) {
           <div class="highLow">
             <div class="five-day-high">
               <strong>
-              ${forecastDay.temperature.maximum}°
+              ${forecastHigh}°
               </strong>
             </div>
             <div class="five-day-low">
-            ${forecastDay.temperature.minimum}°
+            ${forecastLow}°
             </div
           </div>
         </div>
