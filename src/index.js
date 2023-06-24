@@ -21,128 +21,31 @@ function formateDate() {
   dateTime.innerHTML = `${currentDateTime}`;
 
   return currentDateTime;
+  return days[day];
 }
 
 formateDate();
-
-function changeFiveDay() {
-  let fiveDay = document.querySelector(".five-day");
-  let fiveDayHTML =`<div class="row">`;
-
-  let days = ["Sun","Mon","Tues","Wed","Thu"]
-  days.forEach(function(day) {
-    fiveDayHTML = fiveDayHTML + `
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <strong>${day}</strong>
-          <br />
-          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="Cloudy" id="fiveDayEmoji">
-          <div class="highLow">
-          <strong>19°</strong>
-          <br />
-          10°
-        </div>
-      </div>
-    </div>
-  </div>
-  `;
-  })
-
-  fiveDayHTML = fiveDayHTML + `</div>`
-  fiveDay.innerHTML = fiveDayHTML;
-}
-
-changeFiveDay();
-
-function formateDate() {
-  let now = new Date();
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = days[now.getDay()];
-  let hour = now.getHours();
-  let minute = now.getMinutes();
-  if (minute < 10) {
-    minute = `0${minute}`;
-  }
-  let currentDateTime = `${day} ${hour}:${minute}`;
-
-  let dateTime = document.querySelector(".dateTime");
-  dateTime.innerHTML = `${currentDateTime}`;
-
-  return currentDateTime;
-}
-
-formateDate();
-
-function changeFiveDay() {
-  let fiveDay = document.querySelector(".five-day");
-  let fiveDayHTML =`<div class="row">`;
-
-  let days = ["Sun","Mon","Tues","Wed","Thu"]
-  days.forEach(function(day) {
-    fiveDayHTML = fiveDayHTML + `
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <strong>${day}</strong>
-          <br />
-          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="Cloudy" id="fiveDayEmoji">
-          <div class="highLow">
-          <strong>19°</strong>
-          <br />
-          10°
-        </div>
-      </div>
-    </div>
-  </div>
-  `;
-  })
-
-  fiveDayHTML = fiveDayHTML + `</div>`
-  fiveDay.innerHTML = fiveDayHTML;
-}
-
-changeFiveDay();
 
 function changeCity(event) {
   event.preventDefault();
   let input = document.querySelector("#cityInput");
-
+    
   let city = document.querySelector(".city");
   city.innerHTML = `${input.value}`;
-
+    
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-
+    
   let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
   let cityName = document.querySelector("#cityInput").value;
   let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
- 
+    
   axios.get(url).then(changeCurrentWeather);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
-
+  
 let currentTemperature = document.querySelector(".currentTemperature");
-
-function changeForecast(response) {
-  console.log(response.data.daily);
-}
-
-function getForecast(city) {
-  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
-  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-
-  axios.get(url).then(changeForecast);
-}
 
 function changeCurrentWeather(response) {
   let currentTemp = Math.round(response.data.temperature.current);
@@ -164,7 +67,7 @@ function changeCurrentWeather(response) {
   let currentEmoji = document.querySelector("#currentEmoji");
   currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 
-  getForecast(response.data.city);
+  getFiveDay(response.data.city);
 }
 
 function convertToFahrenheit(event) {
@@ -190,3 +93,46 @@ function convertToCelsius(event) {
 
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", convertToCelsius);	
+
+function changeFiveDay(response) {
+  console.log(response.data.daily);
+    
+  let fiveDayForecast = response.data.daily;
+  let fiveDay = document.querySelector(".five-day");
+
+  let fiveDayHTML =`<div class="row">`;
+  fiveDayForecast.forEach(forecastDay => {
+    fiveDayHTML = fiveDayHTML + `
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="day">
+          <strong>${formateDate(forecastDay.dt)}</strong>
+          </div>
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="weather-icon" id="five-day-emoji">
+          <div class="highLow">
+            <div class="five-day-high">
+              <strong>
+              ${forecastDay.temperature.maximum}°
+              </strong>
+            </div>
+            <div class="five-day-low">
+            ${forecastDay.temperature.minimum}°
+            </div
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+    fiveDayHTML = fiveDayHTML + `</div>`;
+    fiveDay.innerHTML = fiveDayHTML;
+  });
+}  
+
+function getFiveDay(city) {
+  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
+  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(url).then(changeFiveDay);
+  console.log(city);
+}
