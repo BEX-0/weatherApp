@@ -134,6 +134,13 @@ form.addEventListener("submit", changeCity);
 
 let currentTemperature = document.querySelector(".currentTemperature");
 
+function changeForecast(city) {
+  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
+  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+
+  console.log(url);
+}
+
 function changeCurrentWeather(response) {
   let currentTemp = Math.round(response.data.temperature.current);
   currentTemperature.innerHTML = currentTemp;
@@ -153,18 +160,8 @@ function changeCurrentWeather(response) {
   
   let currentEmoji = document.querySelector("#currentEmoji");
   currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
-  
+
   changeForecast(response.data.city);
-
-  console.log(response.data);
-}
-
-function changeForecast(city) {
-  apiKey = "82f43b0671f2tb328187o7be4ab620aa";
-  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-
-
-  axios.get(url).then(changeForecast);
 }
 
 function convertToFahrenheit(event) {
