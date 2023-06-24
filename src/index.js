@@ -153,3 +153,5 @@ function getFiveDay(city) {
   axios.get(url).then(changeFiveDay);
   console.log(city);
 }
+
+getFiveDay("Tokyo");
