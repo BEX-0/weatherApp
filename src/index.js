@@ -1,17 +1,5 @@
-let now = new Date();
-
-function formatTime() {
-  let hour = now.getHours();
-  let minute = now.getMinutes();
-  if (minute < 10) {
-    minute = `0${minute}`;
-  }
-
-  let currentTime = document.querySelector(".current-time");
-  currentTime.innerHTML = `${hour}:${minute}`;
-}
-
 function formateDate() {
+  let now = new Date();
   let days = [
     "Sunday",
     "Monday",
@@ -19,19 +7,23 @@ function formateDate() {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
+    "Saturday"
   ];
   let day = days[now.getDay()];
-  
+  let hour = now.getHours();
+  let minute = now.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+  let currentDateTime = `${day} ${hour}:${minute}`;
 
-  let currentDay = document.querySelector(".current-date");
-  currentDay.innerHTML = day;
+  let dateTime = document.querySelector(".dateTime");
+  dateTime.innerHTML = `${currentDateTime}`;
 
-  return days[day];
+  return currentDateTime;
 }
 
 formateDate();
-formatTime();
 
 function changeCity(event) {
   event.preventDefault();
@@ -101,6 +93,23 @@ function convertToCelsius(event) {
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", convertToCelsius);	
 
+function formatDateForecast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  let days = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ]
+
+  return days[day];
+}
+
 function changeFiveDay(response, day) {
   console.log(response.data.daily);
     
@@ -115,7 +124,7 @@ function changeFiveDay(response, day) {
       <div class="card">
         <div class="card-body">
           <div class="day">
-          <strong>${forecastDay.time}</strong>
+          <strong>${formatDateForecast(forecastDay.time)}</strong>
           </div>
           <img src="${forecastDay.condition.icon_url}" alt="weather-icon" id="five-day-emoji">
           <div class="highLow">
