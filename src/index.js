@@ -117,7 +117,7 @@ function changeFiveDay(response, day) {
           <div class="day">
           <strong>${forecastDay.time}</strong>
           </div>
-          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="weather-icon" id="five-day-emoji">
+          <img src="${forecastDay.condition.icon_url}" alt="weather-icon" id="five-day-emoji">
           <div class="highLow">
             <div class="five-day-high">
               <strong>
