@@ -125,20 +125,23 @@ function changeCity(event) {
   let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
   let cityName = document.querySelector("#cityInput").value;
   let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
-  setTimeout(() => {
+ 
   axios.get(url).then(changeCurrentWeather);
-  })
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
 
 let currentTemperature = document.querySelector(".currentTemperature");
 
-function changeForecast(city) {
-  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
-  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+function changeForecast(response) {
+  console.log(response.data.daily);
+}
 
-  console.log(url);
+function getForecast(city) {
+  let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
+  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(url).then(changeForecast);
 }
 
 function changeCurrentWeather(response) {
@@ -161,7 +164,7 @@ function changeCurrentWeather(response) {
   let currentEmoji = document.querySelector("#currentEmoji");
   currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 
-  changeForecast(response.data.city);
+  getForecast(response.data.city);
 }
 
 function convertToFahrenheit(event) {
