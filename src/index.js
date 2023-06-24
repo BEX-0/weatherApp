@@ -1,5 +1,17 @@
+let now = new Date();
+
+function formatTime() {
+  let hour = now.getHours();
+  let minute = now.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+
+  let currentTime = document.querySelector(".current-time");
+  currentTime.innerHTML = `${hour}:${minute}`;
+}
+
 function formateDate() {
-  let now = new Date();
   let days = [
     "Sunday",
     "Monday",
@@ -10,21 +22,16 @@ function formateDate() {
     "Saturday",
   ];
   let day = days[now.getDay()];
-  let hour = now.getHours();
-  let minute = now.getMinutes();
-  if (minute < 10) {
-    minute = `0${minute}`;
-  }
-  let currentDateTime = `${day} ${hour}:${minute}`;
+  
 
-  let dateTime = document.querySelector(".dateTime");
-  dateTime.innerHTML = `${currentDateTime}`;
+  let currentDay = document.querySelector(".current-date");
+  currentDay.innerHTML = day;
 
-  return currentDateTime;
   return days[day];
 }
 
 formateDate();
+formatTime();
 
 function changeCity(event) {
   event.preventDefault();
@@ -94,7 +101,7 @@ function convertToCelsius(event) {
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", convertToCelsius);	
 
-function changeFiveDay(response) {
+function changeFiveDay(response, day) {
   console.log(response.data.daily);
     
   let fiveDayForecast = response.data.daily;
@@ -108,7 +115,7 @@ function changeFiveDay(response) {
       <div class="card">
         <div class="card-body">
           <div class="day">
-          <strong>${formateDate(forecastDay.dt)}</strong>
+          <strong>${forecastDay.time}</strong>
           </div>
           <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png"" alt="weather-icon" id="five-day-emoji">
           <div class="highLow">
