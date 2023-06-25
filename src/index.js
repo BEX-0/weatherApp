@@ -17,7 +17,7 @@ function formateDate() {
   }
   let currentDateTime = `${day} ${hour}:${minute}`;
 
-  let dateTime = document.querySelector(".dateTime");
+  let dateTime = document.querySelector(".date-time");
   dateTime.innerHTML = `${currentDateTime}`;
 
   return currentDateTime;
@@ -27,7 +27,7 @@ formateDate();
 
 function changeCity(event) {
   event.preventDefault();
-  let input = document.querySelector("#cityInput");
+  let input = document.querySelector("#city-input");
     
   let city = document.querySelector(".city");
   city.innerHTML = `${input.value}`;
@@ -36,16 +36,15 @@ function changeCity(event) {
   fahrenheitLink.classList.remove("active");
     
   let apiKey = "82f43b0671f2tb328187o7be4ab620aa";
-  let cityName = document.querySelector("#cityInput").value;
+  let cityName = document.querySelector("#city-input").value;
   let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
     
   axios.get(url).then(changeCurrentWeather);
-  console.log(url);
 }
-let form = document.querySelector("#citySearch");
+let form = document.querySelector("#city-search");
 form.addEventListener("submit", changeCity);
   
-let currentTemperature = document.querySelector(".currentTemperature");
+let currentTemperature = document.querySelector(".current-temperature");
 
 function changeCurrentWeather(response) {
   let currentTemp = Math.round(response.data.temperature.current);
@@ -53,7 +52,7 @@ function changeCurrentWeather(response) {
 
   celsiusTemp = response.data.temperature.current;
 
-  let condition = document.querySelector(".currentCondition");
+  let condition = document.querySelector(".current-condition");
   condition.innerHTML = response.data.condition.description;
 
   let humidity = document.querySelector(".humidity");
@@ -64,7 +63,7 @@ function changeCurrentWeather(response) {
   let currentWind = response.data.wind.speed;
   wind.innerHTML = `${currentWind}km/h`;
   
-  let currentEmoji = document.querySelector("#currentEmoji");
+  let currentEmoji = document.querySelector("#current-emoji");
   currentEmoji.setAttribute("src" , `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 
   getFiveDay(response.data.city);
@@ -124,7 +123,7 @@ fiveDayForecast.slice(0, 5).forEach(function(forecastDay) {
             <strong>${formatDateForecast(forecastDay.time)}</strong>
           </div>
           <img src="${forecastDay.condition.icon_url}" alt="weather-icon" id="five-day-emoji"></img>
-          <div class="highLow">
+          <div class="high-low">
             <div class="five-day-high">
               <strong>
               ${Math.round(forecastDay.temperature.maximum)}°

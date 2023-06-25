@@ -25,14 +25,14 @@ a {
   color: rgb(137, 137, 137);
 }
 
-.currentTemperature,
-.highLow,
-.weatherDetails {
+.current-temperature,
+.high-low,
+.weather-details {
   font-family: monospace;
   color: #1f5192;
 }
 
-.currentTemperature,
+.current-temperature,
 .city {
   font-size: 50px;
   font-weight: bold;
@@ -51,11 +51,11 @@ a {
   line-height: 1.3;
 }
 
-.highLow strong,
-.weatherDetails,
-a {
+.high-low strong,
+.weatherDetails,a {
   color: #2C74B3
 }
+
 
 h1 {
   top: 20px;
@@ -86,12 +86,12 @@ li:first-letter {
   top: 40px;
 }
 
-.topUpperLeft {
+.top-upper-left {
   text-align: start;
   padding-left: 100px;
 }
 
-.topUpperRight {
+.top-upper-right {
   text-align: end;
   padding-right: 100px;
 }
@@ -103,11 +103,11 @@ ul {
   padding-left: 0px;
 }
 
-.unitConvert {
+.unit-convert {
   font-size: 15px;
   font-weight: bold;
 }
 
-.unitConvert .active {
+.unit-convert .active {
   color: white;
 }
