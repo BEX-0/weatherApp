@@ -32,12 +32,17 @@ a {
   color: #1f5192;
 }
 
-.current-temperature,
 .city {
   font-size: 50px;
   font-weight: bold;
   color: white;
 }
+
+  .current-temperature {
+    font-size: 60px;
+    font-weight: bold;
+    color:white;
+  }
 
 
 .five-day {
