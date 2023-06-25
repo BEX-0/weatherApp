@@ -40,6 +40,7 @@ function changeCity(event) {
   let url = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
     
   axios.get(url).then(changeCurrentWeather);
+  console.log(url);
 }
 let form = document.querySelector("#citySearch");
 form.addEventListener("submit", changeCity);
@@ -111,8 +112,6 @@ function formatDateForecast(timestamp) {
 }
 
 function changeFiveDay(response) {
-  console.log(response.data.daily);
-    
   let fiveDayForecast = response.data.daily;
   let fiveDay = document.querySelector(".five-day");
   let fiveDayHTML =`<div class="row">`;
@@ -147,7 +146,7 @@ function getFiveDay(city) {
   let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(url).then(changeFiveDay);
-  console.log(city);
 }
 
 getFiveDay("Tokyo");
+axios.get(`https://api.shecodes.io/weather/v1/current?query=Tokyo&key=82f43b0671f2tb328187o7be4ab620aa&units=metric`).then(changeCurrentWeather);
