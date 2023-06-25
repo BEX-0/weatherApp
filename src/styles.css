@@ -22,17 +22,17 @@ a {
   color: white;
 }
 
+.city {
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+}
+
 .current-temperature,
 .high-low,
 .weather-details {
   font-family: monospace;
   color: #00dfff;
-}
-
-.city {
-  font-size: 50px;
-  font-weight: bold;
-  color: white;
 }
 
 .current-temperature {
